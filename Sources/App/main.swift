@@ -14,7 +14,21 @@ print("-")
 
 // TESTS
 
-let mkdn = "this **is bold** see?. \n Here [Swift](http://swift.org) we have a link"
+let mkdn = "ok\n" +
+  "this **is bold** see?\n" +
+  "Here [Swift](http://swift.org) we have a link\n" +
+  "Now a nice kitty ![Kitty](http://imgur.com/kitty) here\n" +
+  "some inline code `a = 1 + 2` and\n" +
+  "some code block: \n" +
+  "``` \n" +
+  "let a = b+c\n" +
+  "print(a)\n" +
+  "``` \n" +
+  "finally\n" +
+  "a ruler\n" +
+  "---\n" +
+  "end of tests"
+
 print("MKDN: ", mkdn)
 
 do {

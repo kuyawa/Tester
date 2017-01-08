@@ -89,13 +89,13 @@ class Markdown {
         parseDeleted(&md)
         parseImages(&md)
         parseLinks(&md)
+        parseCodeBlock(&md)
+        parseCodeInline(&md)
+        parseHorizontalRule(&md)
 /*
         parseUnorderedLists(&md)
         parseOrderedLists(&md)
         parseBlockquotes(&md)
-        parseCodeBlock(&md)
-        parseCodeInline(&md)
-        parseHorizontalRule(&md)
         parseYoutubeVideos(&md)
         parseParagraphs(&md)
 */        
@@ -138,6 +138,19 @@ class Markdown {
         md.matchAndReplace("(^|\\s)http(.*?)(\\s|\\.\\s|\\.$|,|$)", "$1<a href=\"http$2\">http$2</a>$3 ", options: [.anchorsMatchLines])
     }
     
+    func parseCodeBlock(_ md: inout NSMutableString) {
+        md.matchAndReplace("```(.*?)```", "<pre>$1</pre>", options: [.dotMatchesLineSeparators])
+        //parseBlock(&md, format: "^\\s{4}", blockEnclose: ("<pre>", "</pre>"))
+    }
+    
+    func parseCodeInline(_ md: inout NSMutableString) {
+        md.matchAndReplace("`(.*?)`", "<code>$1</code>")
+    }
+    
+    func parseHorizontalRule(_ md: inout NSMutableString) {
+        md.matchAndReplace("---", "<hr>")
+    }
+    
 /*    
     func parseUnorderedLists(_ md: inout NSMutableString) {
         //md.matchAndReplace("^\\*(.*)?", "<li>$1</li>", options: [.anchorsMatchLines])
@@ -152,19 +165,6 @@ class Markdown {
         //md.matchAndReplace("^>(.*)?", "<blockquote>$1</blockquote>", options: [.anchorsMatchLines])
         parseBlock(&md, format: "^>", blockEnclose: ("<blockquote>", "</blockquote>"))
         parseBlock(&md, format: "^:", blockEnclose: ("<blockquote>", "</blockquote>"))
-    }
-    
-    func parseCodeBlock(_ md: inout NSMutableString) {
-        md.matchAndReplace("```(.*?)```", "<pre>$1</pre>", options: [.dotMatchesLineSeparators])
-        //parseBlock(&md, format: "^\\s{4}", blockEnclose: ("<pre>", "</pre>"))
-    }
-    
-    func parseCodeInline(_ md: inout NSMutableString) {
-        md.matchAndReplace("`(.*?)`", "<code>$1</code>")
-    }
-    
-    func parseHorizontalRule(_ md: inout NSMutableString) {
-        md.matchAndReplace("---", "<hr>")
     }
     
     func parseYoutubeVideos(_ md: inout NSMutableString) {
