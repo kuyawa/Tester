@@ -97,31 +97,36 @@ class Markdown {
         parseOrderedLists(&md)
         parseBlockquotes(&md)
         parseYoutubeVideos(&md)
-        parseParagraphs(&md)
 */        
+        parseParagraphs(&md)
 
         return String(describing: md)
     }
     
     func cleanHtml(_ md: inout NSMutableString) {
+    	print("Clean html...")
         md.matchAndReplace("<.*?>", "")
     }
     
     func parseHeaders(_ md: inout NSMutableString) {
+    	print("Parsing headers...")
         md.matchAndReplace("^###(.*)?", "<h3>$1</h3>", options: [.anchorsMatchLines])
         md.matchAndReplace("^##(.*)?", "<h2>$1</h2>", options: [.anchorsMatchLines])
         md.matchAndReplace("^#(.*)?", "<h1>$1</h1>", options: [.anchorsMatchLines])
     }
 
     func parseBold(_ md: inout NSMutableString) {
+    	print("Parsing bold...")
         md.matchAndReplace("\\*\\*(.*?)\\*\\*", "<b>$1</b>")
     }
     
     func parseItalic(_ md: inout NSMutableString) {
+    	print("Parsing italic...")
         md.matchAndReplace("\\*(.*?)\\*", "<i>$1</i>")
     }
     
     func parseDeleted(_ md: inout NSMutableString) {
+    	print("Parsing deleted...")
         md.matchAndReplace("~~(.*?)~~", "<s>$1</s>")
     }
     
@@ -139,15 +144,18 @@ class Markdown {
     }
     
     func parseCodeBlock(_ md: inout NSMutableString) {
+    	print("Parsing code block...")
         md.matchAndReplace("```(.*?)```", "<pre>$1</pre>", options: [.dotMatchesLineSeparators])
         //parseBlock(&md, format: "^\\s{4}", blockEnclose: ("<pre>", "</pre>"))
     }
     
     func parseCodeInline(_ md: inout NSMutableString) {
+    	print("Parsing code inline...")
         md.matchAndReplace("`(.*?)`", "<code>$1</code>")
     }
     
     func parseHorizontalRule(_ md: inout NSMutableString) {
+    	print("Parsing line...")
         md.matchAndReplace("---", "<hr>")
     }
     
@@ -170,11 +178,11 @@ class Markdown {
     func parseYoutubeVideos(_ md: inout NSMutableString) {
         md.matchAndReplace("\\[youtube (.*?)\\]", "<p><a href=\"http://www.youtube.com/watch?v=$1\" target=\"_blank\"><img src=\"http://img.youtube.com/vi/$1/0.jpg\" alt=\"Youtube video\" width=\"240\" height=\"180\" /></a></p>")
     }
-    
+*/
     func parseParagraphs(_ md: inout NSMutableString) {
         md.matchAndReplace("\n\n([^\n]+)\n\n", "\n\n<p>$1</p>\n\n", options: [.dotMatchesLineSeparators])
     }
-    
+/*    
     func parseBlock(_ md: inout NSMutableString, format: String, blockEnclose: (String, String), lineEnclose: (String, String)? = nil) {
         let lines = md.components(separatedBy: .newlines)
         var result = [String]()
