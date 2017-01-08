@@ -92,14 +92,13 @@ class Markdown {
         parseCodeBlock(&md)
         parseCodeInline(&md)
         parseHorizontalRule(&md)
-/*
         parseUnorderedLists(&md)
         parseOrderedLists(&md)
         parseBlockquotes(&md)
-*/        
         parseYoutubeVideos(&md)
         parseParagraphs(&md)
 
+    	print("Markdown exit...")
         return String(describing: md)
     }
     
@@ -159,23 +158,24 @@ class Markdown {
         md.matchAndReplace("---", "<hr>")
     }
     
-/*    
     func parseUnorderedLists(_ md: inout NSMutableString) {
+    	print("Parsing ulists...")
         //md.matchAndReplace("^\\*(.*)?", "<li>$1</li>", options: [.anchorsMatchLines])
         parseBlock(&md, format: "^\\*", blockEnclose: ("<ul>", "</ul>"), lineEnclose: ("<li>", "</li>"))
     }
     
     func parseOrderedLists(_ md: inout NSMutableString) {
+    	print("Parsing olists...")
         parseBlock(&md, format: "^\\d+[\\.|-]", blockEnclose: ("<ol>", "</ol>"), lineEnclose: ("<li>", "</li>"))
     }
     
     func parseBlockquotes(_ md: inout NSMutableString) {
+    	print("Parsing blockquotes...")
         //md.matchAndReplace("^>(.*)?", "<blockquote>$1</blockquote>", options: [.anchorsMatchLines])
         parseBlock(&md, format: "^>", blockEnclose: ("<blockquote>", "</blockquote>"))
         parseBlock(&md, format: "^:", blockEnclose: ("<blockquote>", "</blockquote>"))
     }
     
-*/
     func parseYoutubeVideos(_ md: inout NSMutableString) {
     	print("Parsing youtube...")
         md.matchAndReplace("\\[youtube (.*?)\\]", "<p><a href=\"http://www.youtube.com/watch?v=$1\" target=\"_blank\"><img src=\"http://img.youtube.com/vi/$1/0.jpg\" alt=\"Youtube video\" width=\"240\" height=\"180\" /></a></p>")
@@ -185,7 +185,7 @@ class Markdown {
     	print("Parsing paragraphs...")
         md.matchAndReplace("\n\n([^\n]+)\n\n", "\n\n<p>$1</p>\n\n", options: [.dotMatchesLineSeparators])
     }
-/*    
+
     func parseBlock(_ md: inout NSMutableString, format: String, blockEnclose: (String, String), lineEnclose: (String, String)? = nil) {
         let lines = md.components(separatedBy: .newlines)
         var result = [String]()
@@ -211,7 +211,7 @@ class Markdown {
         
         md = NSMutableString(string: result.joined(separator: "\n"))
     }
-*/    
+
 }
 
 

@@ -16,8 +16,23 @@ print("-")
 
 let mkdn = "ok\n" +
   "this **is bold** see?\n" +
+  "this *is italic* see?\n" +
+  "this ~~is deleted~~ see?\n" +
+  "- \n" +
   "Here [Swift](http://swift.org) we have a link\n" +
   "Now a nice kitty ![Kitty](http://imgur.com/kitty) here\n" +
+  "- \n" +
+  "olist: \n" +
+  "1. item 1 \n" +
+  "2. item 2 \n" +
+  "- \n" +
+  "ulist: \n" +
+  "* item 1 \n" +
+  "* item 2 \n" +
+  "- \n" +
+  "quote: \n" +
+  "> Roses are red... \n" +
+  "- \n" +
   "some inline code `a = 1 + 2` and\n" +
   "some code block: \n" +
   "``` \n" +
@@ -29,7 +44,8 @@ let mkdn = "ok\n" +
   "---\n" +
   "and\n" +
   "a [youtube kutekitty] video\n" +
-  "end of tests"
+  "end of tests" +
+  "-"
 
 print("MKDN: ", mkdn)
 
