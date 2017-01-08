@@ -27,6 +27,8 @@ let mkdn = "ok\n" +
   "finally\n" +
   "a ruler\n" +
   "---\n" +
+  "and\n" +
+  "a [youtube kutekitty] video\n" +
   "end of tests"
 
 print("MKDN: ", mkdn)

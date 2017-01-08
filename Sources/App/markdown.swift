@@ -96,8 +96,8 @@ class Markdown {
         parseUnorderedLists(&md)
         parseOrderedLists(&md)
         parseBlockquotes(&md)
-        parseYoutubeVideos(&md)
 */        
+        parseYoutubeVideos(&md)
         parseParagraphs(&md)
 
         return String(describing: md)
@@ -175,11 +175,14 @@ class Markdown {
         parseBlock(&md, format: "^:", blockEnclose: ("<blockquote>", "</blockquote>"))
     }
     
+*/
     func parseYoutubeVideos(_ md: inout NSMutableString) {
+    	print("Parsing youtube...")
         md.matchAndReplace("\\[youtube (.*?)\\]", "<p><a href=\"http://www.youtube.com/watch?v=$1\" target=\"_blank\"><img src=\"http://img.youtube.com/vi/$1/0.jpg\" alt=\"Youtube video\" width=\"240\" height=\"180\" /></a></p>")
     }
-*/
+
     func parseParagraphs(_ md: inout NSMutableString) {
+    	print("Parsing paragraphs...")
         md.matchAndReplace("\n\n([^\n]+)\n\n", "\n\n<p>$1</p>\n\n", options: [.dotMatchesLineSeparators])
     }
 /*    
